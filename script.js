@@ -24,11 +24,11 @@ require([
             type: "simple", // autocasts as new SimpleRenderer()
             symbol: {
                 type: "simple-marker", // Use simple-marker for 2D map
-                color: "orange", // Symbol color
+                color: "red", // Symbol color
                 size: "11px", // Symbol size
                 outline: {  // autocasts as new SimpleLineSymbol()=
                   width: 1.5,
-                  color: "Purple"
+                  color: "white"
     }
             }
         },
