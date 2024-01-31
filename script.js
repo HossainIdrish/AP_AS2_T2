@@ -1,4 +1,7 @@
-require(["esri/WebScene", "esri/layers/CSVLayer", "esri/views/SceneView"], (
+require([
+    "esri/WebScene", 
+    "esri/layers/CSVLayer", 
+    "esri/views/SceneView"], (
     WebScene,
     CSVLayer,
     SceneView
@@ -8,7 +11,7 @@ require(["esri/WebScene", "esri/layers/CSVLayer", "esri/views/SceneView"], (
 
     // Popup template for the CSV layer
     const template = {
-        title: "Crime Incident",
+        title: "Crime",
         content: "Crime: {Crime}<br>District: {District}<br>Neighborhood: {Neighborhood}<br>Location: {ILEADSStreet}"
     };
 
@@ -22,10 +25,10 @@ require(["esri/WebScene", "esri/layers/CSVLayer", "esri/views/SceneView"], (
             symbol: {
                 type: "simple-marker", // Use simple-marker for 2D map
                 color: "orange", // Symbol color
-                size: "10px", // Symbol size
+                size: "11px", // Symbol size
                 outline: {  // autocasts as new SimpleLineSymbol()=
                   width: 1.5,
-                  color: "black"
+                  color: "Purple"
     }
             }
         },
