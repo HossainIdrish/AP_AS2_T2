@@ -27,8 +27,8 @@ require([
                 color: "red", // Symbol color
                 size: "12px", // Symbol size
                 outline: {  // autocasts as new SimpleLineSymbol()=
-                  width: 1.5,
-                  color: "white"
+                  width: 2,
+                  color: "purple"
     }
             }
         },
@@ -38,7 +38,7 @@ require([
 
     // WebScene
     const map = new WebScene({
-        basemap: "dark-gray" // Choose an appropriate basemap
+        basemap: "dark-gray"
     });
 
     map.add(csvLayer);
