@@ -25,7 +25,7 @@ require([
             symbol: {
                 type: "simple-marker", // Use simple-marker for 2D map
                 color: "red", // Symbol color
-                size: "11px", // Symbol size
+                size: "12px", // Symbol size
                 outline: {  // autocasts as new SimpleLineSymbol()=
                   width: 1.5,
                   color: "white"
