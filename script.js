@@ -1,52 +1,71 @@
-require([
-  "esri/Map",
-  "esri/layers/CSVLayer",
-  "esri/views/MapView",
-  "esri/config",
-  "esri/core/urlUtils",
-  "dojo/domReady!"
-], function(
-  Map,
-  CSVLayer,
-  MapView,
-  esriConfig,
-  urlUtils
-) {
-  var url = "https://raw.githubusercontent.com/orhuna/WebGIS_SLU_M1/main/Module%202/stl_crime_wgs_84.csv";
-  esriConfig.request.corsEnabledServers.push('https://raw.githubusercontent.com');
+require(["esri/WebScene", "esri/layers/CSVLayer", "esri/views/SceneView"], (
+    WebScene,
+    CSVLayer,
+    SceneView
+) => {
+    const url = "https://raw.githubusercontent.com/orhuna/WebGIS_SLU_M1/main/Module%202/stl_crime_wgs_84.csv";
 
-  // Update the template to match the fields in your CSV file
-  const template = {
-    title: "Crime Info",
-    content: "Details about the crime event."
-    // Customize the content with appropriate fields from your CSV
-  };
+    const template = {
+        title: "Earthquake Info",
+        content: "Magnitude {mag} {type} hit {place} on {time}."
+    };
 
-  const csvLayer = new CSVLayer({
-    url: url,
-    popupTemplate: template
-  });
+    const csvLayer = new CSVLayer({
+        url: url,
+        copyright: "USGS Earthquakes",
+        popupTemplate: template
+    });
 
-  var symbol = {
-    type: "simple-marker", 
-    color: "red"
-  };
+    csvLayer.renderer = {
+        type: "simple",
+        symbol: {
+            type: "point-3d",
+            symbolLayers: [{
+                type: "icon",
+                resource: { primitive: "circle" },
+                material: { color: [255, 84, 54, 1] },
+                size: 5
+            }, {
+                type: "icon",
+                resource: { primitive: "circle" },
+                material: { color: [255, 84, 54, 0] },
+                outline: { color: [255, 84, 54, 0.6], size: 1 },
+                size: 25
+            }]
+        }
+    };
 
-  csvLayer.renderer = {
-    type: "simple",
-    symbol: symbol
-  };
+    const map = new WebScene({
+        portalItem: {
+            id: "a467ef1140de4e88acf34d38df9fb869"
+        }
+    });
 
-  var map = new Map({
-    basemap: "gray",
-    layers: [csvLayer]
-  });
+    map.add(csvLayer);
 
-  var view = new MapView({
-    container: "viewDiv",
-    center: [-90.1994, 38.6270],
-    zoom: 10,
-    map: map
-  });
+    const view = new SceneView({
+        container: "viewDiv",
+        qualityProfile: "high",
+        map: map,
+        alphaCompositingEnabled: true,
+        highlightOptions: {
+            fillOpacity: 0,
+            color: "#ffffff"
+        },
+        constraints: {
+            altitude: {
+                min: 700000
+            }
+        },
+        environment: {
+            background: {
+                type: "color",
+                color: [0, 0, 0, 0]
+            },
+            lighting: {
+                type: "virtual"
+            }
+        }
+    });
 });
 
